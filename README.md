@@ -30,7 +30,7 @@ Now that the function is running in your OpenFaaS environment you can test it fr
 
 ```
 $ curl localhost:31112/function/gitrepocount -d "kacole2"
-$ User kacole2 has a repo total of: 56
+$ {"user":"kacole2","repocount":58}
 ```
 
 ### License
