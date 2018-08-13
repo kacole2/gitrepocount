@@ -12,7 +12,7 @@ Make sure you have deployed an OpenFaaS stack to your cluster using the instruct
 
 **Get the CLI**
 
-The [faas-cli](https://github.com/openfaas/faas-cli) can be installed via `brew install faas-cli` or `curl -sSL https://get.openfaas.com | sudo sh`.
+The [faas-cli](https://github.com/openfaas/faas-cli) can be installed via `brew install faas-cli` or `curl -sSL https://cli.openfaas.com | sudo sh`.
 
 ### Create the Kubernetes Secret
 
