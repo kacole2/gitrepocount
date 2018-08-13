@@ -14,13 +14,42 @@ Make sure you have deployed an OpenFaaS stack to your cluster using the instruct
 
 The [faas-cli](https://github.com/openfaas/faas-cli) can be installed via `brew install faas-cli` or `curl -sSL https://get.openfaas.com | sudo sh`.
 
+### Create the Kubernetes Secret
+
+The GitHub API limits unauthorized requests by rate limiting. Use your GitHub API Personal Access Token to get 5000 requests per hour. Go to your GitHub Settings -> Developer Settings -> Personal Access Tokens and "Generate new token". Only "Public" needs to be selected
+![](img/img01.png)
+
+With your new token, get the base64 encoded version with
+```
+echo -n '<insert token here>' | base64
+```
+
+Create a new secret file called `github-api-secret.yaml`
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-api-secret
+  namespace: openfaas-fn
+type: Opaque
+data:
+  github-api-secret: <base64 encoded secret>
+```
+
+Create the Kubernetes Secret:
+```
+kubectl create -f github-api-secret.yaml
+```
+
+### Deploy the function
+
 Now deploy the function as follows:
 
 ```
 # git clone https://github.com/kacole2/gitrepocount
 # cd gitrepocount
-// make any changes to the gitrepocount.yml file for OpenFaaS API gateway
-# faas-cli deploy -f gitrepocount.yml
+// make any changes to the gitrepocount.yml file for OpenFaaS API gateway or if the secret has been renamed
+# faas-cli deploy
 200 OK
 URL: http://localhost:31112/function/gitrepocount
 ```

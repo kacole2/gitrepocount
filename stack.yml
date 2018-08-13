@@ -6,4 +6,6 @@ functions:
   gitrepocount:
     lang: go
     handler: ./gitrepocount
-    image: kacole2/gitrepocount:0.0.2
+    image: kacole2/gitrepocount:0.0.3
+    secrets:
+      - github-api-secret
