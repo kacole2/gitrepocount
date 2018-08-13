@@ -2,11 +2,17 @@ package function
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 
 	"github.com/google/go-github/github"
 )
+
+type RepoCount struct {
+	User  string `json:"user"`
+	Count int    `json:"repocount"`
+}
 
 // Handle a serverless request
 func Handle(req []byte) string {
@@ -29,5 +35,10 @@ func Handle(req []byte) string {
 		}
 		opt.Page = resp.NextPage
 	}
-	return fmt.Sprintf("User %s has a repo total of: %v", string(req), len(allRepos))
+	totalCount := &RepoCount{User: string(req), Count: len(allRepos)}
+	repoCountMarsh, err := json.Marshal(totalCount)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+	return fmt.Sprintf("%s", string(repoCountMarsh))
 }
