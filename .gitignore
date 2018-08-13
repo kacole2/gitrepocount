@@ -1,2 +1,5 @@
 template
 build
+vendor
+gitrepocount/Gopkg.toml
+gitrepocount/Gopkg.lock
