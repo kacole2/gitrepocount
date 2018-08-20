@@ -19,6 +19,12 @@ The [faas-cli](https://github.com/openfaas/faas-cli) can be installed via `brew 
 The GitHub API limits unauthorized requests by rate limiting. Use your GitHub API Personal Access Token to get 5000 requests per hour. Go to your GitHub Settings -> Developer Settings -> Personal Access Tokens and "Generate new token". Only "Public" needs to be selected
 ![](img/img01.png)
 
+Create a secret using the command line.
+```
+VALUE=password
+kubectl create secret generic -n openfaas-fn github-api-secret --from-literal github-api-secret=$VALUE
+```
+
 With your new token, get the base64 encoded version with
 ```
 echo -n '<insert token here>' | base64

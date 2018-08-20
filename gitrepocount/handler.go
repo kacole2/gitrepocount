@@ -3,7 +3,6 @@ package function
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -48,7 +47,6 @@ func Handle(req []byte) string {
 	)
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
-
 	//Pagination Option for every 20 records
 	opt := &github.RepositoryListOptions{
 		ListOptions: github.ListOptions{PerPage: 20},
@@ -73,5 +71,5 @@ func Handle(req []byte) string {
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
-	return fmt.Sprintf("%s", string(repoCountMarsh))
+	return string(repoCountMarsh)
 }
